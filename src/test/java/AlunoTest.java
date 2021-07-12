@@ -18,11 +18,11 @@ class AlunoTest {
     @Test
     void deveRetornarCoordenadorDoCursoDeUmAluno(){
         Aluno aluno = new Aluno();
-        Professor professor = new Professor();
+        Professor coodernador = new Professor();
         Curso curso =  new Curso();
 
-        professor.setNome("Marco Antonio");
-        curso.setProfessor(professor);
+        coodernador.setNome("Marco Antonio");
+        curso.setProfessor(coodernador);
         aluno.setCurso(curso);
 
         assertEquals("Marco Antonio", aluno.getCoordenadorCurso());

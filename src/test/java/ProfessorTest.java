@@ -38,4 +38,36 @@ class ProfessorTest {
 
         assertEquals("Ensino Superior", professor.getTipoDeEnsinoProfessor());
     }
+
+    @Test
+    void deveRetornarODiretorDeUmProfessor() {
+        Professor professor = new Professor();
+        Professor diretor = new Professor();
+        Escola escola = new Escola();
+        Curso curso = new Curso();
+
+        diretor.setNome("João");
+        diretor.setCurso(curso);
+        curso.setEscola(escola);
+        escola.setProfessor(diretor);
+        professor.setCurso(curso);
+
+        assertEquals("João", professor.getCurso().getEscola().getProfessor().getNome());
+    }
+
+    @Test
+    void deveRetornarOCoordenadorDeUmProfessor() {
+        Professor professor = new Professor();
+        Professor coordenador = new Professor();
+
+        Curso curso = new Curso();
+
+        coordenador.setNome("José");
+        coordenador.setCurso(curso);
+        curso.setProfessor(coordenador);
+
+        professor.setCurso(curso);
+
+        assertEquals("José", professor.getCurso().getCoordenadorDoCurso());
+    }
 }
