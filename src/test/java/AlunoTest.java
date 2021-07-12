@@ -8,11 +8,13 @@ class AlunoTest {
     void deveRetornarEstadoDeNaturalidadeDoAluno(){
         Aluno aluno = new Aluno();
         Cidade cidade = new Cidade();
+        Estado estado = new Estado();
 
-        cidade.setNomeCidade("Juiz de Fora");
+        estado.setUnidadeFederativa("MG");
+        cidade.setEstado(estado);
         aluno.setCidade(cidade);
 
-        assertEquals("Juiz de Fora", aluno.getCidade().getNomeCidade());
+        assertEquals("MG", aluno.getEstadoDeNaturalidadeDoAluno());
     }
 
     @Test
