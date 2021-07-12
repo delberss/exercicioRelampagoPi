@@ -1,13 +1,13 @@
 public class Curso {
-    private Professor professor;
+    private Professor coodernador;
     private TipoEnsino tipoEnsino;
     private Escola escola;
 
-    public Professor getProfessor() {
-        return professor;
+    public Professor getCoodernador() {
+        return coodernador;
     }
-    public Curso setProfessor(Professor professor) {
-        this.professor = professor;
+    public Curso setCoodernador(Professor coodernador) {
+        this.coodernador = coodernador;
         return this;
     }
 
@@ -27,7 +27,10 @@ public class Curso {
         return this;
     }
 
-    public String getCoordenadorDoCurso(){
-        return this.getProfessor().getNome();
+    public String getEscolaridadeCoordenador(){
+        if (coodernador == null){
+            throw new NullPointerException("Sem coordenador");
+        }
+        return coodernador.getEscolaridadePessoa();
     }
 }

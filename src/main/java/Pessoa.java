@@ -26,4 +26,11 @@ public class Pessoa {
         this.cidade = cidade;
         return this;
     }
+
+    public String getEscolaridadePessoa(){
+        if (escolaridade == null){
+            throw new NullPointerException("Sem escolaridade");
+        }
+        return escolaridade.getNivelEscolaridade();
+    }
 }

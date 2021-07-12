@@ -1,12 +1,12 @@
 public class Escola {
-    private Professor professor;
+    private Professor diretor;
     private Cidade cidade;
 
-    public Professor getProfessor() {
-        return professor;
+    public Professor getDiretor() {
+        return diretor;
     }
-    public Escola setProfessor(Professor professor) {
-        this.professor = professor;
+    public Escola setDiretor(Professor diretor) {
+        this.diretor = diretor;
         return this;
     }
 
@@ -18,7 +18,22 @@ public class Escola {
         return this;
     }
 
-    public String estadoDoAluno(){
-        return this.getCidade().getEstado().getUnidadeFederativa();
+    public String getEstadoDoAluno(){
+        if (cidade == null){
+            throw new NullPointerException("Sem cidade");
+        }
+        else{
+            if (cidade.getEstado() == null){
+                throw new NullPointerException("Sem estado");
+            }
+        }
+        return cidade.getEstado().getUnidadeFederativa();
+    }
+
+    public String getEscolaridadeDiretor(){
+        if (diretor == null){
+            throw new NullPointerException("Sem diretor");
+        }
+        return diretor.getEscolaridadePessoa();
     }
 }

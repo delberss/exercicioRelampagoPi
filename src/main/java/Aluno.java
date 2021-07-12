@@ -10,10 +10,21 @@ public class Aluno extends Pessoa{
     }
 
     public String getEstadoDeNaturalidadeDoAluno(){
+        if (this.getCidade() == null){
+            throw new NullPointerException("Sem cidade");
+        }
+        else{
+            if (this.getCidade().getEstado() == null){
+                throw new NullPointerException("Sem estado");
+            }
+        }
         return this.getCidade().getEstado().getUnidadeFederativa();
     }
 
-    public String getCoordenadorCurso(){
-        return this.getCurso().getProfessor().getNome();
+    public String getCoordenadorDoCurso(){
+        if (curso == null){
+            throw new NullPointerException("Sem curso");
+        }
+        return curso.getCoodernador().getNome();
     }
 }

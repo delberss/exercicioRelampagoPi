@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProfessorTest {
     @Test
-    void escolaridadeProfessor(){
+    void deveRetornarEscolaridadeProfessor(){
 
         Professor professor = new Professor();
         Escolaridade escolaridade = new Escolaridade();
@@ -12,7 +12,20 @@ class ProfessorTest {
         escolaridade.setNivelEscolaridade("Doutor");
         professor.setEscolaridade(escolaridade);
 
-        assertEquals("Doutor", professor.getEscolaridadeProfessor());
+        assertEquals("Doutor", professor.getEscolaridadePessoa());
+    }
+
+    @Test
+    void deveRetornarExcecaoParaProfessorSemEscolaridade(){
+        try{
+            Professor professor = new Professor();
+            professor.getEscolaridadePessoa();
+            fail();
+        }
+        catch (NullPointerException e){
+            assertEquals("Sem escolaridade", e.getMessage());
+        }
+
     }
 
     @Test
@@ -23,7 +36,20 @@ class ProfessorTest {
         cidade.setNomeCidade("Juiz de Fora");
         professor.setCidade(cidade);
 
-        assertEquals("Juiz de Fora", professor.getCidade().getNomeCidade());
+        assertEquals("Juiz de Fora", professor.getCidadeDoProfessor());
+    }
+
+    @Test
+    void deveRetornarExcecaoProfessorSemCidade(){
+
+        try{
+            Professor professor = new Professor();
+            professor.getCidadeDoProfessor();
+            fail();
+        }
+        catch (NullPointerException e){
+            assertEquals("Sem cidade", e.getMessage());
+        }
     }
 
     @Test
@@ -40,6 +66,20 @@ class ProfessorTest {
     }
 
     @Test
+    void deveRetornarExcecaoProfessorSemTipoDeEnsino(){
+        try{
+            Professor professor = new Professor();
+            Curso curso = new Curso();
+
+            professor.setCurso(curso);
+            professor.getTipoDeEnsinoProfessor();
+        }
+        catch (NullPointerException e){
+            assertEquals("Sem tipo de ensino", e.getMessage());
+        }
+    }
+
+    @Test
     void deveRetornarODiretorDeUmProfessor() {
         Professor professor = new Professor();
         Professor diretor = new Professor();
@@ -49,25 +89,51 @@ class ProfessorTest {
         diretor.setNome("João");
         diretor.setCurso(curso);
         curso.setEscola(escola);
-        escola.setProfessor(diretor);
+        escola.setDiretor(diretor);
         professor.setCurso(curso);
 
-        assertEquals("João", professor.getCurso().getEscola().getProfessor().getNome());
+        assertEquals("João", professor.getDiretorDoProfessor());
+    }
+
+    @Test
+    void deveRetornarExcecaoProfessorSemEscola() {
+        try{
+            Professor professor = new Professor();
+            Curso curso = new Curso();
+
+            professor.setCurso(curso);
+            professor.getDiretorDoProfessor();
+            fail();
+        }
+        catch (NullPointerException e){
+            assertEquals("Sem escola", e.getMessage());
+        }
+
     }
 
     @Test
     void deveRetornarOCoordenadorDeUmProfessor() {
         Professor professor = new Professor();
         Professor coordenador = new Professor();
-
         Curso curso = new Curso();
 
         coordenador.setNome("José");
         coordenador.setCurso(curso);
-        curso.setProfessor(coordenador);
+        curso.setCoodernador(coordenador);
 
         professor.setCurso(curso);
 
-        assertEquals("José", professor.getCurso().getCoordenadorDoCurso());
+        assertEquals("José", professor.getCoordenadorDoProfessor());
+    }
+
+    @Test
+    void deveRetornarExcecaoProfessorSemCurso() {
+        try{
+            Professor professor = new Professor();
+            professor.getCoordenadorDoProfessor();
+        }
+        catch (NullPointerException e){
+            assertEquals("Sem curso", e.getMessage());
+        }
     }
 }

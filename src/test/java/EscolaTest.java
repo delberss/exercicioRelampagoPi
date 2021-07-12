@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EscolaTest {
     @Test
-    void escolaridadeDiretorDeUmaEscola(){
+    void deveRetornarEscolaridadeDiretorDeUmaEscola(){
 
         Professor diretor = new Professor();
         Escolaridade escolaridade = new Escolaridade();
@@ -12,13 +12,25 @@ class EscolaTest {
 
         escolaridade.setNivelEscolaridade("Doutor");
         diretor.setEscolaridade(escolaridade);
-        escola.setProfessor(diretor);
+        escola.setDiretor(diretor);
 
-        assertEquals("Doutor", escola.getProfessor().getEscolaridadeProfessor());
+        assertEquals("Doutor", escola.getEscolaridadeDiretor());
     }
 
     @Test
-    void estadoEmQueUmAlunoEstuda(){
+    void deveRetornarExcecaoParaEscolaSemDiretor(){
+        try{
+            Escola escola = new Escola();
+            escola.getEscolaridadeDiretor();
+            fail();
+        }
+        catch (NullPointerException e){
+            assertEquals("Sem diretor", e.getMessage());
+        }
+    }
+
+    @Test
+    void deveRetonarEstadoEmQueUmAlunoEstuda(){
         Escola escola = new Escola();
         Cidade cidade = new Cidade();
         Estado estado = new Estado();
@@ -27,7 +39,35 @@ class EscolaTest {
         cidade.setEstado(estado);
         escola.setCidade(cidade);
 
-        assertEquals("MG", escola.estadoDoAluno());
+        assertEquals("MG", escola.getEstadoDoAluno());
+    }
+
+    @Test
+    void deveRetonarExcecaoCidadeEmQueUmAlunoEstuda(){
+
+        try{
+            Escola escola = new Escola();
+            escola.getEstadoDoAluno();
+            fail();
+        }
+        catch (NullPointerException e){
+            assertEquals("Sem cidade", e.getMessage());
+        }
+    }
+
+    @Test
+    void deveRetonarExcecaoEstadoEmQueUmAlunoEstuda(){
+
+        try{
+            Escola escola = new Escola();
+            Cidade cidade = new Cidade();
+            escola.setCidade(cidade);
+            escola.getEstadoDoAluno();
+            fail();
+        }
+        catch (NullPointerException e){
+            assertEquals("Sem estado", e.getMessage());
+        }
     }
 
 }

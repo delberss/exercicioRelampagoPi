@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CursoTest {
     @Test
-    void escolaridadeCoordenadorDeUmCurso(){
+    void deveRetornarEscolaridadeCoordenadorDeUmCurso(){
 
         Professor coordenador = new Professor();
         Escolaridade escolaridade = new Escolaridade();
@@ -12,9 +12,21 @@ class CursoTest {
 
         escolaridade.setNivelEscolaridade("Doutor");
         coordenador.setEscolaridade(escolaridade);
-        curso.setProfessor(coordenador);
+        curso.setCoodernador(coordenador);
 
-        assertEquals("Doutor", curso.getProfessor().getEscolaridadeProfessor());
+        assertEquals("Doutor", curso.getEscolaridadeCoordenador());
+    }
+
+    @Test
+    void deveRetornarExcecaoParaCursoSemCoordenador(){
+        try{
+            Curso curso = new Curso();
+            curso.getEscolaridadeCoordenador();
+            fail();
+        }
+        catch (NullPointerException e){
+            assertEquals("Sem coordenador", e.getMessage());
+        }
     }
 
 }
